@@ -96,6 +96,7 @@ int main(void) {
     	string result;
 
     	if (success) {
+    		
         	result = "{\"status\":\"success\"}";
     	} else {
         	result = "{\"status\":\"error\"}";
