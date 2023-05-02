@@ -1,26 +1,25 @@
 #include <mariadb/conncpp.hpp>
 #include <string>
-using namespace std;
 
 #ifndef USERINFO_H
 #define USERINFO_H
 
 class userInfo {
 public:
-     userInfo();
-     userInfo(sql::SQLString f, sql::SQLString l, sql::SQLString e, sql::SQLString u,sql::SQLString p,sql::SQLString I);
-     string text();
-     string json();
-     
-     string first;
-     string last;
-     string email;
-     string username;
-     string password;
-     string ID;
+    userInfo();
+    userInfo(const std::string& f, const std::string& l, const std::string& e, const std::string& u, const std::string& p, const std::string& I);
+    std::string text();
+    std::string json();
+
+    std::string first;
+    std::string last;
+    std::string email;
+    std::string username;
+    std::string password;
+    std::string ID;
 
 private:
 
 };
 
-#endif 
+#endif

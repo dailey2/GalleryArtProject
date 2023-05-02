@@ -33,7 +33,6 @@ userDB::userDB() {
    	
 }
 
-
 // Pulls user info from database when they attempt to register or log in to see if the username already exists.
 bool userDB::usernameExists(string username) {
 	
@@ -76,7 +75,8 @@ bool userDB::emailExists(string email) {
 	}
 }
 
-// Pulls user info from database when they attempt to log in to see if the password already exists.
+// Pulls user info from database when they attempt to log in to see if the password exists.
+// Change this to compare username and password
 bool userDB::passwordExists(string password) {
 	
     // Make sure the connection is still valid
@@ -97,61 +97,59 @@ bool userDB::passwordExists(string password) {
 	}
 }
 
-
 // Registers a user when they attempt to sign up.
-void userDB::registerUser(string first,string last,string email,string username,string password){
+void userDB::registerUser(std::string first, std::string last, std::string email, std::string username, std::string password){
 
-	if (!conn) {
-   		cerr << "Invalid database connection" << endl;
-   		exit (EXIT_FAILURE);
-  	}
+    if (!conn) {
+        std::cerr << "Invalid database connection" << std::endl;
+        exit (EXIT_FAILURE);
+    }
 
-  	std::auto_ptr<sql::Statement> stmnt(conn->createStatement());
+    std::unique_ptr<sql::Statement> stmnt(conn->createStatement());
 
-  	stmnt->executeQuery("INSERT INTO users(firstName,lastName,email,username,password) VALUES ('"+first+"','"+last+"','"+email+"','"+username+"','"+password+"')");
+    stmnt->executeQuery("INSERT INTO users(firstName,lastName,email,username,password) VALUES ('" + first + "','" + last + "','" + email + "','" + username + "','" + password + "')");
 }
 
+// Logs in a user when they attempt to sign up.
+userInfo userDB::logInUser(std::string username, std::string password){
 
-// Registers a user when they attempt to sign up.
-userInfo userDB::logInUser(string username,string password){
+    if (!conn) {
+        std::cerr << "Invalid database connection" << std::endl;
+        exit (EXIT_FAILURE);
+    }
 
-	if (!conn) {
-   		cerr << "Invalid database connection" << endl;
-   		exit (EXIT_FAILURE);
-  	}
+    std::unique_ptr<sql::Statement> stmnt(conn->createStatement());
 
-  	std::auto_ptr<sql::Statement> stmnt(conn->createStatement());
+    std::unique_ptr<sql::ResultSet> res(stmnt->executeQuery("SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'"));
 
-  	stmnt->executeQuery("Select From users WHERE username = '"+username+"' AND password = '"+password+"'");
-  	
-  	// Get user info
+    userInfo entry;
+    
+    // Get user info
     if (res->next()) {
-    	entry = userInfo(res->getString("firstName"),res->getString("lastName"),res->getString("email"),
-    	res->getString("username"),res->getString("password"),res->getString("ID"));
+        entry = userInfo(res->getString("firstName"), res->getString("lastName"), res->getString("email"),
+        res->getString("username"), res->getString("password"), res->getString("ID"));
     }
     return entry;
 }
 
-
 // Fetch entry by ID
-userInfo userDB::fetchEntry(string id){
+userInfo userDB::fetchEntry(std::string id){
 
-	userEntry entry;	
-	
-	if (!conn) {
-   		cerr << "Invalid database connection" << endl;
-   		exit (EXIT_FAILURE);
-  	}
+    if (!conn) {
+        std::cerr << "Invalid database connection" << std::endl;
+        exit (EXIT_FAILURE);
+    }
 
-  	std::auto_ptr<sql::Statement> stmnt(conn->createStatement());
+    std::unique_ptr<sql::Statement> stmnt(conn->createStatement());
 
-  	
-    sql::ResultSet *res = stmnt->executeQuery("SELECT * FROM users WHERE ID = '"+id+"'");
+    std::unique_ptr<sql::ResultSet> res(stmnt->executeQuery("SELECT * FROM users WHERE ID = '" + id + "'"));
     
+    userInfo entry;
+
     // Get first entry
     if (res->next()) {
-    	entry = userInfo(res->getString("firstName"),res->getString("lastName"),res->getString("email"),
-    	res->getString("username"),res->getString("password"),res->getString("ID"));
+        entry = userInfo(res->getString("firstName"), res->getString("lastName"), res->getString("email"),
+        res->getString("username"), res->getString("password"), res->getString("ID"));
     }
     return entry;
 }

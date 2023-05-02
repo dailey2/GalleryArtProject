@@ -346,8 +346,9 @@
       </div>
     </footer>
 
+
 <!-- Operations -->   
-    <!-- Sign Up Modal -->
+<!-- Sign Up Modal -->
 <div
   class="modal fade"
   id="signUp"
@@ -367,39 +368,38 @@
         ></button>
       </div>
       <div class="modal-body">
-        <form id="sign-up-form" onsubmit="signUp(event)">
+        <form id="sign-up-form">
           <div class="mb-3">
-            <label for="first-name" class="col-form-label">
+            <label for="signUp-first" class="col-form-label">
               First Name:
             </label>
-            <input type="text" class="form-control" id="first" name="firstName" />
+            <input type="text" class="form-control" id="signUp-first" name="firstName" />
           </div>
           <div class="mb-3">
-            <label for="last-name" class="col-form-label">Last Name:</label>
-            <input type="text" class="form-control" id="last" name="lastName" />
+            <label for="signUp-last" class="col-form-label">Last Name:</label>
+            <input type="text" class="form-control" id="signUp-last" name="lastName" />
           </div>
           <div class="mb-3">
-            <label for="email" class="col-form-label">Email:</label>
-            <input type="email" class="form-control" id="email" name="email" />
+            <label for="signUp-email" class="col-form-label">Email:</label>
+            <input type="email" class="form-control" id="signUp-email" name="email" />
           </div>
           <div class="mb-3">
-            <label for="username" class="col-form-label">Username:</label>
-            <input type="text" class="form-control" id="username" name="username" />
+            <label for="signUp-username" class="col-form-label">Username:</label>
+            <input type="text" class="form-control" id="signUp-username" name="username" />
           </div>
           <div class="mb-3">
-            <label for="password" class="col-form-label">Password:</label>
-            <input type="password" class="form-control" id="password" name="password" />
+            <label for="signUp-password" class="col-form-label">Password:</label>
+            <input type="password" class="form-control" id="signUp-password" name="password" />
           </div>
           <div class="modal-footer">
             <button
               type="button"
-              id="signUp-btn"
               class="btn btn-secondary"
               data-bs-dismiss="modal"
             >
               Close
             </button>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" id="signUp-btn" class="btn btn-primary">Submit</button>
           </div>
         </form>
       </div>
@@ -408,67 +408,58 @@
 </div>
     
     
-    <!-- Log In Modal -->
-    <div
-      class="modal fade"
-      id="logIn"
-      tabindex="-1"
-      aria-labelledby="logInLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="logInLabel">Log In</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="mb-3">
-                <label for="username" class="col-form-label">Username:</label>
-                <input type="username" class="form-control" id="usernameLogIn" />
-              </div>
-              <div class="mb-3">
-                <label for="password" class="col-form-label">Password:</label>
-                <input type="username" class="form-control" id="passwordLogIn" />
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" id="logIn-btn">Submit</button>
-          </div>
-        </div>
-      </div>
-    </div>
+<!-- Log In Modal -->
+<div
+  class="modal fade"
+  id="logIn"
+  tabindex="-1"
+  aria-labelledby="logInLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<h5 class="modal-title" id="logInLabel">Log In</h5>
+		<button
+		  type="button"
+		  class="btn-close"
+		  data-bs-dismiss="modal"
+		  aria-label="Close"
+		></button>
+	  </div>
+	  <div class="modal-body">
+		<form>
+		  <div class="mb-3">
+			<label for="logIn-username" class="col-form-label">Username:</label>
+			<input type="username" class="form-control" id="logIn-username" />
+		  </div>
+		  <div class="mb-3">
+			<label for="logIn-password" class="col-form-label">Password:</label>
+			<input type="password" class="form-control" id="logIn-password" />
+		  </div>
+		</form>
+	  </div>
+	  <div class="modal-footer">
+		<button
+		  type="button"
+		  class="btn btn-secondary"
+		  data-bs-dismiss="modal"
+		>
+		  Close
+		</button>
+		<button type="submit" class="btn btn-primary" data-bs-dismiss="modal" id="logIn-btn">Submit</button>
+	  </div>
+	</div>
+  </div>
+</div>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
       crossorigin="anonymous"
     ></script>
+    <script src="artProject.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js"></script>
-
-    <script>
-      mapboxgl.accessToken =
-        'pk.eyJ1IjoiYnRyYXZlcnN5IiwiYSI6ImNrbmh0dXF1NzBtbnMyb3MzcTBpaG10eXcifQ.h5ZyYCglnMdOLAGGiL1Auw'
-      var map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v11',
-        center: [-71.060982, 42.35725],
-        zoom: 18,
-      })
-    </script>
+    
   </body>
 </html>

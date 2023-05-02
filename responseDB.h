@@ -5,20 +5,15 @@
 #include <string>
 #include <vector>
 #include <mariadb/conncpp.hpp>
-#include "userInfo.h"
+#include "responseInfo.h"
 
-#ifndef USERDB_H
-#define USERDB_H
+#ifndef RESPONSEDB_H
+#define RESPONSEDB_H
 
-class userDB {
+class responseDB {
 public:
-    userDB();
-    userInfo fetchEntry(std::string id);
-    bool usernameExists(std::string username);
-    bool emailExists(std::string email);
-    bool passwordExists(std::string email);
-    void registerUser(std::string first, std::string last, std::string email, std::string username, std::string password);
-    userInfo logInUser(std::string username, std::string password);
+    responseDB();
+    void submitResponse(std::string artwork, std::string emotion);
 
 private:
     const std::string db_url = "jdbc:mariadb://localhost:3306/GalleryArtProject";
