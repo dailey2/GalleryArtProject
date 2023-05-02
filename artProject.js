@@ -101,14 +101,14 @@ function completeRegistration(results) {
 		alert("Registration failed!");
 		return;
 	}else{
-		alert("Registration Successful!");
+		alert("Registration Successful! Please log in!");
 	}
 	var user = results['status'];
 	console.log("Registered:"+user);
 }
 
 
-// Called when the user presses the sign up button
+// Called when the user presses the log in button
 function logIn() {
 	console.log("logging in user")
 	

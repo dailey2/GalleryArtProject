@@ -20,11 +20,11 @@ userDB::userDB() {
   	properties = my_properties;
 
     // Establish Connection
-  	std::unique_ptr<sql::Connection> my_conn(driver->connect(db_url, properties));
+  	unique_ptr<sql::Connection> my_conn(driver->connect(db_url, properties));
     
     // Check success
     if (!my_conn) {
-   		cerr << "Invalid database connection" << endl;
+   		std::cerr << "Invalid database connection" << std::endl;
    		exit (EXIT_FAILURE);
    	}	
    	
@@ -42,7 +42,7 @@ bool userDB::usernameExists(string username) {
    		exit (EXIT_FAILURE);
    	}	
     // Create a new Statement
-	std::unique_ptr<sql::Statement> stmnt(conn->createStatement());
+	unique_ptr<sql::Statement> stmnt(conn->createStatement());
     
     // Execute query
     sql::ResultSet *res = stmnt->executeQuery("SELECT * FROM users WHERE username = '"+username+"'");
@@ -63,7 +63,7 @@ bool userDB::emailExists(string email) {
    		exit (EXIT_FAILURE);
    	}	
     // Create a new Statement
-	std::unique_ptr<sql::Statement> stmnt(conn->createStatement());
+	unique_ptr<sql::Statement> stmnt(conn->createStatement());
     
     // Execute query
     sql::ResultSet *res = stmnt->executeQuery("SELECT * FROM users WHERE email = '"+email+"'");
@@ -85,7 +85,7 @@ bool userDB::userExists(string username, string password) {
    	}
    	
     // Create a new Statement
-	std::unique_ptr<sql::Statement> stmnt(conn->createStatement());
+	unique_ptr<sql::Statement> stmnt(conn->createStatement());
     
     // Execute query
     sql::ResultSet *res = stmnt->executeQuery("SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'");
@@ -97,31 +97,30 @@ bool userDB::userExists(string username, string password) {
 	}
 }
 
-
 // Registers a user when they attempt to sign up.
-void userDB::registerUser(std::string first, std::string last, std::string email, std::string username, std::string password){
+void userDB::registerUser(string first, string last, string email, string username, string password){
 
     if (!conn) {
-        std::cerr << "Invalid database connection" << std::endl;
+        cerr << "Invalid database connection" << endl;
         exit (EXIT_FAILURE);
     }
 
-    std::unique_ptr<sql::Statement> stmnt(conn->createStatement());
+    unique_ptr<sql::Statement> stmnt(conn->createStatement());
 
     stmnt->executeQuery("INSERT INTO users(firstName,lastName,email,username,password) VALUES ('" + first + "','" + last + "','" + email + "','" + username + "','" + password + "')");
 }
 
 // Logs in a user when they attempt to sign up.
-userInfo userDB::logInUser(std::string username, std::string password){
+userInfo userDB::logInUser(string username, string password){
 
     if (!conn) {
-        std::cerr << "Invalid database connection" << std::endl;
+        cerr << "Invalid database connection" << endl;
         exit (EXIT_FAILURE);
     }
 
-    std::unique_ptr<sql::Statement> stmnt(conn->createStatement());
+    unique_ptr<sql::Statement> stmnt(conn->createStatement());
 
-    std::unique_ptr<sql::ResultSet> res(stmnt->executeQuery("SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'"));
+    unique_ptr<sql::ResultSet> res(stmnt->executeQuery("SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'"));
 
     userInfo entry;
     
@@ -134,16 +133,16 @@ userInfo userDB::logInUser(std::string username, std::string password){
 }
 
 // Fetch entry by ID
-userInfo userDB::fetchEntry(std::string id){
+userInfo userDB::fetchEntry(string id){
 
     if (!conn) {
-        std::cerr << "Invalid database connection" << std::endl;
+        cerr << "Invalid database connection" << endl;
         exit (EXIT_FAILURE);
     }
 
-    std::unique_ptr<sql::Statement> stmnt(conn->createStatement());
+    unique_ptr<sql::Statement> stmnt(conn->createStatement());
 
-    std::unique_ptr<sql::ResultSet> res(stmnt->executeQuery("SELECT * FROM users WHERE ID = '" + id + "'"));
+    unique_ptr<sql::ResultSet> res(stmnt->executeQuery("SELECT * FROM users WHERE ID = '" + id + "'"));
     
     userInfo entry;
 

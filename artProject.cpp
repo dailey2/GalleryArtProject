@@ -7,6 +7,8 @@
 #include "httplib.h"
 #include "userDB.h"
 #include "userInfo.h"
+#include "responseDB.h"
+#include "responseInfo.h"
 
 using namespace httplib;
 using namespace std;
@@ -31,7 +33,7 @@ int main(void) {
         string password = req.matches[2];
         string result;
 
-        if(ubd.userExists){
+        if(udb.userExists(username,password)){
             userInfo user = udb.logInUser(username, password);
             result = "{\"status\":\"success\",\"user\":\"" + username + "\"}";
             res.set_content(result, "text/json");

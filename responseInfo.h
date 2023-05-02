@@ -4,16 +4,18 @@
 #ifndef RESPONSEINFO_H
 #define RESPONSEINFO_H
 
-class userInfo {
-public:
-    userInfo();
-    userInfo(const std::string& a, const std::string& e, const std::string& I);
-    std::string text();
-    std::string json();
+using namespace std;
 
-    std::string artwork;
-    std::string emotion;
-    std::string ID;
+class responseInfo {
+public:
+    responseInfo();
+    responseInfo(sql::SQLString a, sql::SQLString e, sql::SQLString I);
+	string text();
+    string json();
+
+    string artwork;
+    string emotion;
+    string ID;
 
 private:
 

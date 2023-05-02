@@ -20,7 +20,7 @@ responseDB::responseDB() {
   	properties = my_properties;
 
     // Establish Connection
-  	std::unique_ptr<sql::Connection> my_conn(driver->connect(db_url, properties));
+  	unique_ptr<sql::Connection> my_conn(driver->connect(db_url, properties));
     
     // Check success
     if (!my_conn) {
@@ -37,11 +37,11 @@ responseDB::responseDB() {
 bool responseDB::submitResponse(std::string artwork, std::string emotion){
 
     if (!conn) {
-        std::cerr << "Invalid database connection" << std::endl;
+        cerr << "Invalid database connection" << endl;
         exit (EXIT_FAILURE);
     }
 
-    std::unique_ptr<sql::Statement> stmnt(conn->createStatement());
+    unique_ptr<sql::Statement> stmnt(conn->createStatement());
 
     bool success = stmnt->execute("INSERT INTO responses(artwork,emotion) VALUES ('" + artwork + "','" + emotion + "')");
 
