@@ -31,7 +31,7 @@ int main(void) {
         string password = req.matches[2];
         string result;
 
-        if(udb.usernameExists(username) && udb.passwordExists(password)){
+        if(ubd.userExists){
             userInfo user = udb.logInUser(username, password);
             result = "{\"status\":\"success\",\"user\":\"" + username + "\"}";
             res.set_content(result, "text/json");
@@ -41,7 +41,7 @@ int main(void) {
         }
     });
 
-    // Service to log out users
+    // Service to log out users (Needs to be worked on!!)
     svr.Get(R"(/artProject/logOut/(.*)/(.*))", [&](const Request& req, Response& res) {
         res.set_header("Access-Control-Allow-Origin","*");
         string username = req.matches[1];
@@ -88,18 +88,17 @@ int main(void) {
         string artwork = req.matches[1];
         string emotion = req.matches[2];
 
-        // Check to see if username or email exists before completing registration
-        rdb.submitResponse(artwork,emotion);
+        // Change submitResponse function to return a boolean indicating success or failure!!
+    	bool success = rdb.submitResponse(artwork, emotion);
 
-        string result;
-		
-		// This code is from register user and needs changed
-        //if (usernameSuccess && emailSuccess && passwordSuccess){
-        //    result = "{\"status\":\"success\"}";
-        //} else {
-        //    result = "{\"status\":\"error\"}";
-        //}
-        //res.set_content(result, "text/json");
+    	string result;
+
+    	if (success) {
+        	result = "{\"status\":\"success\"}";
+    	} else {
+        	result = "{\"status\":\"error\"}";
+    	}
+    	res.set_content(result, "text/json");
     });
 
 	//Require users to register 

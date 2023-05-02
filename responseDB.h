@@ -13,7 +13,7 @@
 class responseDB {
 public:
     responseDB();
-    void submitResponse(std::string artwork, std::string emotion);
+    bool submitResponse(std::string artwork, std::string emotion);
 
 private:
     const std::string db_url = "jdbc:mariadb://localhost:3306/GalleryArtProject";
@@ -24,5 +24,5 @@ private:
     std::unique_ptr<sql::Connection> conn;
 };
 
-#endif /* USERDB_H */
+#endif /* RESPONSEDB_H */
 

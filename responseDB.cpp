@@ -34,7 +34,7 @@ responseDB::responseDB() {
 }
 
 // Submits a response to the database
-void responseDB::submitResponse(std::string artwork, std::string emotion){
+bool responseDB::submitResponse(std::string artwork, std::string emotion){
 
     if (!conn) {
         std::cerr << "Invalid database connection" << std::endl;
@@ -43,5 +43,8 @@ void responseDB::submitResponse(std::string artwork, std::string emotion){
 
     std::unique_ptr<sql::Statement> stmnt(conn->createStatement());
 
-    stmnt->executeQuery("INSERT INTO responses(artwork,emotion) VALUES ('" + artwork + "','" + emotion + "')");
+    bool success = stmnt->execute("INSERT INTO responses(artwork,emotion) VALUES ('" + artwork + "','" + emotion + "')");
+
+    return success;
 }
+

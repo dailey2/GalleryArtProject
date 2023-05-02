@@ -16,8 +16,8 @@ public:
     userInfo fetchEntry(std::string id);
     bool usernameExists(std::string username);
     bool emailExists(std::string email);
-    bool passwordExists(std::string email);
     void registerUser(std::string first, std::string last, std::string email, std::string username, std::string password);
+    bool userExists(std::string username, std::string password);
     userInfo logInUser(std::string username, std::string password);
 
 private:

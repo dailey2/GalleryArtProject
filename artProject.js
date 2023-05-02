@@ -12,25 +12,67 @@ var artwork;
 var emotion;
 
 
-// Action if the user presses the sign up button
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById('signUp-btn').addEventListener("click", (e) => {
-    registerUser();
-  });
+  const signUpButton = document.getElementById('signUp-btn');
+  if (signUpButton) {
+    signUpButton.addEventListener("click", (e) => {
+      registerUser();
+    });
+  } else {
+    console.warn("signUp-btn element not found in the DOM");
+  }
 });
 
-// Action if the user presses the log in button
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById('logIn-btn').addEventListener("click", (e) => {
-    logIn();
-  });
+  const logInButton = document.getElementById('logIn-btn');
+  if (logInButton) {
+    logInButton.addEventListener("click", (e) => {
+      logIn();
+    });
+  } else {
+    console.warn("logIn-btn element not found in the DOM");
+  }
 });
+
 
 // Action if the user presses the submit response button
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById('submitResponse-btn').addEventListener("click", (e) => {
-    submitResponse();
-  });
+  const submitResponseButton = document.getElementById('submitResponse-btn');
+  if (submitResponseButton) {
+    submitResponseButton.addEventListener("click", (e) => {
+      submitResponse();
+    });
+  } else {
+    console.warn("submitResponse-btn element not found in the DOM");
+  }
+});
+
+// Action if the user clicks the Sign Up link in the navbar
+document.addEventListener("DOMContentLoaded", () => {
+  const navbarSignUpLink = document.getElementById('navbar-signUp');
+  if (navbarSignUpLink) {
+    navbarSignUpLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      const signUpModal = new bootstrap.Modal(document.getElementById('signUp'));
+      signUpModal.show();
+    });
+  } else {
+    console.warn("navbar-signUp element not found in the DOM");
+  }
+});
+
+// Action if the user clicks the Log In link in the navbar
+document.addEventListener("DOMContentLoaded", () => {
+  const navbarLogInLink = document.getElementById('navbar-logIn');
+  if (navbarLogInLink) {
+    navbarLogInLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      const logInModal = new bootstrap.Modal(document.getElementById('logIn'));
+      logInModal.show();
+    });
+  } else {
+    console.warn("navbar-logIn element not found in the DOM");
+  }
 });
 
 
@@ -99,8 +141,8 @@ function completeLogIn(results) {
 function submitResponse() {
 	console.log("Submitting response");
 
-  	artwork = encodeURIComponent(document.getElementById('artwork').value);
-  	emotion = encodeURIComponent(document.getElementById('response').value);
+  	artwork = document.getElementById('artwork').getAttribute('data-value');
+  	emotion = document.querySelector('input[name="emotion"]:checked').value;
 
   	fetch(baseUrl+'/artProject/submit/'+artwork+'/'+emotion, {
     	method: 'get'

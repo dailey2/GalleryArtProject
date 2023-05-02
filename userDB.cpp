@@ -75,20 +75,20 @@ bool userDB::emailExists(string email) {
 	}
 }
 
-// Pulls user info from database when they attempt to log in to see if the password exists.
-// Change this to compare username and password
-bool userDB::passwordExists(string password) {
+// Checks if the provided username and password match an existing user in the database
+bool userDB::userExists(string username, string password) {
 	
     // Make sure the connection is still valid
     if (!conn) {
    		cerr << "Invalid database connection" << endl;
    		exit (EXIT_FAILURE);
-   	}	
+   	}
+   	
     // Create a new Statement
 	std::unique_ptr<sql::Statement> stmnt(conn->createStatement());
     
     // Execute query
-    sql::ResultSet *res = stmnt->executeQuery("SELECT * FROM users WHERE password = '"+password+"'");
+    sql::ResultSet *res = stmnt->executeQuery("SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'");
 	
 	if(res->next()){
 		return true;
@@ -96,6 +96,7 @@ bool userDB::passwordExists(string password) {
 		return false;
 	}
 }
+
 
 // Registers a user when they attempt to sign up.
 void userDB::registerUser(std::string first, std::string last, std::string email, std::string username, std::string password){
