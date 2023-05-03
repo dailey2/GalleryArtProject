@@ -112,19 +112,19 @@ function completeRegistration(results) {
 function logIn() {
 	console.log("logging in user")
 	
-	username = document.getElementById('usernameLogIn').value;
-	password = document.getElementById('passwordLogIn').value;
+	username = document.getElementById('logIn-username').value;
+	password = document.getElementById('logIn-password').value;
 	fetch(baseUrl+'/artProject/logIn/'+username+'/'+password, {
         method: 'get'
     })
     .then (response => response.json() )
-    .then (data =>completeLogIn(data))
+    .then (data =>completeLogIn(data, username))
     .catch(error => {
         {alert("Error: Something went wrong:"+error);}
     })
 }
 
-function completeLogIn(results) {
+function completeLogIn(results, username) {
 	var status = results['status'];
 	if (status != "success") {
 		alert("Log in failed!");
@@ -133,12 +133,60 @@ function completeLogIn(results) {
 		alert("Log in Successful!");
 	}
 	var user = results['status'];
-	console.log("Logged in:"+user);
+	console.log("Logged in:"+ username);
+	
+	localStorage.setItem('loggedIn', true);
+    localStorage.setItem('username', username);
+    
+	loggedIn(username);
 }
+
+// Changes navbar layout when user logs in 
+function loggedIn(username) {
+    document.querySelector('.navbar-brand').innerText = 'Gallery Art Project - Welcome ' + username;
+    
+    document.getElementById('navbar-signUp').style.display = 'none';
+    document.getElementById('navbar-logIn').style.display = 'none';
+    
+    var logoutButton = document.createElement('a');
+    logoutButton.href = "#";
+    logoutButton.className = "nav-link";
+    logoutButton.id = "navbar-logout";
+    logoutButton.innerText = "Logout";
+    logoutButton.onclick = function() {
+        logOut();
+    };
+    
+    document.querySelector('.navbar-nav').appendChild(logoutButton);
+}
+
+// Function to keep the navbar updated when logged in
+function updateNavbar() {
+    if (localStorage.getItem('loggedIn') === 'true') {
+        const username = localStorage.getItem('username');
+        loggedIn(username);
+    }
+}
+
+// Logs out user
+function logOut() {
+    localStorage.removeItem('loggedIn');
+    localStorage.removeItem('username');
+    location.reload();
+}
+
+// Call updateNavbar() on page load
+document.addEventListener('DOMContentLoaded', updateNavbar);
 
 
 // Called when a user presses the submit response button
 function submitResponse() {
+	
+	if (localStorage.getItem('loggedIn') !== 'true') {
+        alert("Please log in to submit a response.");
+        return;
+    }
+    
 	console.log("Submitting response");
 
   	artwork = document.getElementById('artwork').getAttribute('data-value');
@@ -163,6 +211,8 @@ function completeResponse(results) {
 		alert("Response successfully submitted!");
 	}
 }
+
+
 
 
 
