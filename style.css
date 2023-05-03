@@ -7,3 +7,15 @@
 .custom-card .card-body {
   flex: 1;
 }
+
+.team-member-img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.responsive-image {
+  max-height: 80vh; /* Adjust this value based on your preference */
+  object-fit: contain;
+  width: 100%;
+}
