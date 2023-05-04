@@ -39,19 +39,19 @@ PutHTML:
 	cp artWork.html /var/www/html/galleryArtProject/
 	cp artProject.js /var/www/html/galleryArtProject/
 	cp style.css /var/www/html/galleryArtProject/
-	cp project1.html /var/www/html/galleryArtProject/
 	
 	cp Berlant_Drummer.html /var/www/html/galleryArtProject/
 	cp Bulkeley_Warbler.html /var/www/html/galleryArtProject/
 	cp Christo_WrappedReichstag.html /var/www/html/galleryArtProject/
 	cp Davis_Paulo.html /var/www/html/galleryArtProject/
-	cp Hogin_Peace.html /var/www/html/galleryArtProject/
+	cp bustOfVictoria.html /var/www/html/galleryArtProject/
 	cp McPhee_Flareups.html /var/www/html/galleryArtProject/
 	cp McPhee_QuarteredElk.html /var/www/html/galleryArtProject/
 	cp Moore_SpindlePiece.html /var/www/html/galleryArtProject/
 	cp Stella_SatBhai.html /var/www/html/galleryArtProject/
 	cp Surls_WhiteTippedBlooming.html /var/www/html/galleryArtProject/
-	cp mixedMedia.html /var/www/html/galleryArtProject/
+	cp theCeiling.html /var/www/html/galleryArtProject/
+	cp peaceThroughChemistry.html /var/www/html/galleryArtProject/
 
 	@echo "Current contents of your HTML directory: "
 	@ls -l /var/www/html/galleryArtProject
