@@ -6,6 +6,7 @@
   width: 100vw;
   height: 100vh;
   height: 100vh;
+  z-index: -1;
 }
 
 .custom-card {
@@ -36,5 +37,5 @@
   object-position: center;
   transition: object-fit 1s 0s;
   width: 100%;
-    transition: all 1s;
+  transition: all 1s;
 }
