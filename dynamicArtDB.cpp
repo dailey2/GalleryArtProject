@@ -1,7 +1,7 @@
 #include <vector>
 #include <iostream>
 #include <mariadb/conncpp.hpp>
-#include "responseDB.h"
+#include "dynamicArtDB.h"
 #include "dynamicArtInfo.h"
 
 
@@ -33,17 +33,35 @@ dynamicArtDB::dynamicArtDB() {
    	
 }
 
-// Submits a response to the database
-void dynamicArtDB::getEmotionCount(std::string emotion){
-
+// Calculates percentage of emotions 
+void dynamicArtDB::getEmotionCount(std::string emotion) {
     if (!conn) {
         cerr << "Invalid database connection" << endl;
-        exit (EXIT_FAILURE);
+        exit(EXIT_FAILURE);
     }
 
     unique_ptr<sql::Statement> stmnt(conn->createStatement());
+    unique_ptr<sql::ResultSet> resTotal(stmnt->executeQuery("SELECT COUNT(*) as total FROM responses"));
+    int totalResponses = 0;
+    if (resTotal->next()) {
+        totalResponses = resTotal->getInt("total");
+    }
 
-    sql::ResultSet *res = stmnt->executeQuery("SELECT * FROM responses WHERE emotion = '"+emotion+"'");
+    map<string, int> emotionCounts;
+    unique_ptr<sql::ResultSet> resEmotions(stmnt->executeQuery("SELECT emotion, COUNT(*) as count FROM responses GROUP BY emotion"));
 
+    while (resEmotions->next()) {
+        string currentEmotion = resEmotions->getString("emotion");
+        int count = resEmotions->getInt("count");
+        emotionCounts[currentEmotion] = count;
+    }
+
+    map<string, double> emotionPercentages;
+    for (const auto &entry : emotionCounts) {
+        emotionPercentages[entry.first] = static_cast<double>(entry.second) / totalResponses * 100;
+    }
+
+    // emotionPercentages now contains the percentage of responses for each emotion
+    // You can return it or use it as needed for the word cloud
 }
 

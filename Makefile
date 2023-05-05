@@ -30,6 +30,15 @@ $(_OBJDIR)/responseDB.o: responseDB.cpp responseDB.h
 $(_OBJDIR)/artProject.o: artProject.cpp httplib.h
 	$(CC) -c $(CFLAGS) artProject.cpp -o $@
 
+$(_OBJDIR)/dynamicArtInfo.o: dynamicArtInfo.cpp dynamicArtInfo.h
+	$(CC) -c $(CFLAGS) dynamicArtInfo.cpp -o $@
+
+$(_OBJDIR)/dynamicArtDB.o: dynamicArtDB.cpp dynamicArtDB.h
+	$(CC) -c $(CFLAGS) -I/usr/include/cppconn dynamicArtDB.cpp -o $@
+
+$(_OBJDIR)/dynamicArt.o: dynamicArt.cpp httplib.h
+	$(CC) -c $(CFLAGS) dynamicArt.cpp -o $@
+
 GalleryArtProject: $(_OBJDIR)/userInfo.o $(_OBJDIR)/userDB.o $(_OBJDIR)/responseInfo.o $(_OBJDIR)/responseDB.o $(_OBJDIR)/artProject.o
 	$(CC) $(_OBJDIR)/userInfo.o $(_OBJDIR)/userDB.o $(_OBJDIR)/responseInfo.o $(_OBJDIR)/responseDB.o $(_OBJDIR)/artProject.o -o GalleryArtProject -L/usr/local/lib -lmariadbcpp
 
@@ -52,7 +61,10 @@ PutHTML:
 	cp Surls_WhiteTippedBlooming.html /var/www/html/galleryArtProject/
 	cp theCeiling.html /var/www/html/galleryArtProject/
 	cp peaceThroughChemistry.html /var/www/html/galleryArtProject/
-
+	
+	cp dynamicArt.html /var/www/html/galleryArtProject/
+	cp dynamicArt.js /var/www/html/galleryArtProject/
+	
 	@echo "Current contents of your HTML directory: "
 	@ls -l /var/www/html/galleryArtProject
 
