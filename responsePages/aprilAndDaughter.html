@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+    />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Gallery Art Project</title>
+  </head>
+ 
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 fixed-top">
+      	<div class="container">
+        	<a href="#" class="navbar-brand">Gallery Art Project</a>
+
+        <button
+          	class="navbar-toggler"
+          	type="button"
+          	data-bs-toggle="collapse"
+          	data-bs-target="#navmenu"
+        >
+          	<span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navmenu">
+          <ul class="navbar-nav ms-auto">
+          	<li class="nav-item">
+              <a href="artProjectHome.html" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+              <a href="artWork.html" class="nav-link">Art Work</a>
+            </li>
+            <li class="nav-item">
+              <a href="learnMore.html" class="nav-link">Learn More</a>
+            </li>
+            <li class="nav-item">
+              <a href="#signUp" class="nav-link" id="navbar-signUp">Sign Up</a>
+            </li>
+            <li class="nav-item">
+              <a href="#logIn" class="nav-link" id="navbar-logIn">Log In</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+	
+	<section>
+		<div class="p-5">
+			<div class="pt-5">
+				<h3>April and her daughter Sarah</h3>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-12 text-center">
+					<img src="images/aprilAndDaughter.png" id="artwork" data-value="April and her Daughter Sarah" alt="April and her Daughter Sarah" class="img-fluid responsive-image">
+				</div>
+			</div>
+		</div>
+		
+		<div class="p-5">
+			<div class="pt-5">
+				<h3>Select the emotion that best describes your response to this artwork</h3>
+		</div>
+
+
+		<div>
+			<div class="form-check">
+			  <input class="form-check-input" type="radio" name="emotion" id="Radios1" value="Happiness" checked>
+			  <label class="form-check-label" for="exampleRadios1">
+				Happiness
+			  </label>
+			</div>
+			<div class="form-check">
+			  <input class="form-check-input" type="radio" name="emotion" id="Radios2" value="Sadness">
+			  <label class="form-check-label" for="exampleRadios2">
+				Sadness
+			  </label>
+			</div>
+			<div class="form-check">
+			  <input class="form-check-input" type="radio" name="emotion" id="Radios3" value="Fear">
+			  <label class="form-check-label" for="exampleRadios2">
+				Fear
+			  </label>
+			</div>
+			<div class="form-check">
+			  <input class="form-check-input" type="radio" name="emotion" id="Radios4" value="Disgust">
+			  <label class="form-check-label" for="exampleRadios2">
+				Disgust
+			  </label>
+			</div>
+			<div class="form-check">
+			  <input class="form-check-input" type="radio" name="emotion" id="Radios5" value="Anger">
+			  <label class="form-check-label" for="exampleRadios2">
+				Anger
+			  </label>
+			</div>
+			<div class="form-check">
+			  <input class="form-check-input" type="radio" name="emotion" id="Radios6" value="Surprise">
+			  <label class="form-check-label" for="exampleRadios2">
+				Surprise
+			  </label>
+			</div>
+		</div>
+
+		<div>
+			<button type="submit" id="submitResponse-btn" class="btn btn-primary btn-customized mt-4">
+				Submit
+			</button>
+		</div>
+	</div>
+	</section>
+	
+    <!-- Footer -->
+    <footer class="p-3 bg-dark text-white text-center position-relative">
+      <div class="container">
+        <p class="lead">Software Development 2023</p>
+
+        <a href="#" class="position-absolute bottom-0 end-0 p-3 pe-4">
+          <i class="bi bi-arrow-up-circle h1"></i>
+        </a>
+      </div>
+    </footer>
+
+<!-- Operations -->   
+<!-- Sign Up Modal -->
+<div
+  class="modal fade"
+  id="signUp"
+  tabindex="-1"
+  aria-labelledby="enrollLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="signUpLabel">Sign Up</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form id="sign-up-form">
+          <div class="mb-3">
+            <label for="signUp-first" class="col-form-label">
+              First Name:
+            </label>
+            <input type="text" class="form-control" id="signUp-first" name="firstName" />
+          </div>
+          <div class="mb-3">
+            <label for="signUp-last" class="col-form-label">Last Name:</label>
+            <input type="text" class="form-control" id="signUp-last" name="lastName" />
+          </div>
+          <div class="mb-3">
+            <label for="signUp-email" class="col-form-label">Email:</label>
+            <input type="email" class="form-control" id="signUp-email" name="email" />
+          </div>
+          <div class="mb-3">
+            <label for="signUp-username" class="col-form-label">Username:</label>
+            <input type="text" class="form-control" id="signUp-username" name="username" />
+          </div>
+          <div class="mb-3">
+            <label for="signUp-password" class="col-form-label">Password:</label>
+            <input type="password" class="form-control" id="signUp-password" name="password" />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="submit" id="signUp-btn" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+    
+<!-- Log In Modal -->
+<div
+  class="modal fade"
+  id="logIn"
+  tabindex="-1"
+  aria-labelledby="logInLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<h5 class="modal-title" id="logInLabel">Log In</h5>
+		<button
+		  type="button"
+		  class="btn-close"
+		  data-bs-dismiss="modal"
+		  aria-label="Close"
+		></button>
+	  </div>
+	  <div class="modal-body">
+		<form>
+		  <div class="mb-3">
+			<label for="logIn-username" class="col-form-label">Username:</label>
+			<input type="username" class="form-control" id="logIn-username" />
+		  </div>
+		  <div class="mb-3">
+			<label for="logIn-password" class="col-form-label">Password:</label>
+			<input type="password" class="form-control" id="logIn-password" />
+		  </div>
+		</form>
+	  </div>
+	  <div class="modal-footer">
+		<button
+		  type="button"
+		  class="btn btn-secondary"
+		  data-bs-dismiss="modal"
+		>
+		  Close
+		</button>
+		<button type="submit" class="btn btn-primary" data-bs-dismiss="modal" id="logIn-btn">Submit</button>
+	  </div>
+	</div>
+  </div>
+</div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js"></script>
+    <script src="artProject.js"></script>
+    
+  </body>
+</html>
+
+	
