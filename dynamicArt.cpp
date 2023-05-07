@@ -3,6 +3,8 @@
 #include <map>
 #include <vector>
 #include <algorithm>
+#include <nlohmann/json.hpp>
+
 
 #include "httplib.h"
 #include "dynamicArtDB.h"
@@ -10,6 +12,7 @@
 
 using namespace httplib;
 using namespace std;
+using json = nlohmann::json;
 
 const int port = 5005;
 
@@ -17,18 +20,19 @@ dynamicArtDB obj; // Create a global instance of the dynamicArtDB class
 
 int main() {
     httplib::Server svr;
+std::vector<std::string> emotions = {"Happiness", "Sadness", "Fear", "Disgust", "Anger", "Surprise"};
 
-    svr.Get("/dynamicArt/getEmotionPercentages", [&](const httplib::Request& req, httplib::Response& res) {
-        obj.getEmotionCount(""); // Call the getEmotionCount method to populate the percentages map
+  svr.Get(R"(/dynamicArt/getEmotionPercentages/)", [&](const Request& req, Response& res) {
+    res.set_header("Access-Control-Allow-Origin", "*");
+    dynamicArtDB dDB;
+    json result;
 
-        // Build a JSON object from the emotionPercentages map
-        json result;
-        for (const auto &entry : myDatabase.emotionPercentages) {
-            result[entry.first] = entry.second;
-        }
-
-        res.set_content(result.dump(), "application/json");
-    });
+    for (const auto& e : emotions) {
+           int count = dDB.getEmotionCount(e);
+           result[e] = count;
+    }
+   res.set_content(result.dump(), "application/json");
+});
 
     svr.listen("localhost", 8080);
 
