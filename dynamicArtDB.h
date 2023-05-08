@@ -13,7 +13,8 @@
 class dynamicArtDB {
 public:
     dynamicArtDB();
-    int getEmotionCount(string emotion);
+     std::map<std::string, int> getEmotionCount();
+
 
 
 private:
