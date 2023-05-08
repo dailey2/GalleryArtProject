@@ -33,7 +33,7 @@ userDB::userDB() {
    	
 }
 
-// Pulls user info from database when they attempt to register or log in to see if the username already exists.
+// Pulls user info from database when users attempt to register to see if the username already exists.
 bool userDB::usernameExists(string username) {
 	
     // Make sure the connection is still valid
@@ -54,7 +54,7 @@ bool userDB::usernameExists(string username) {
 	}
 }
 
-// Pulls user info from database when they attempt to register to see if the email already exists.
+// Pulls user info from database when users attempt to register to see if the email already exists.
 bool userDB::emailExists(string email) {
 	
     // Make sure the connection is still valid
@@ -110,7 +110,7 @@ void userDB::registerUser(string first, string last, string email, string userna
     stmnt->executeQuery("INSERT INTO users(firstName,lastName,email,username,password) VALUES ('" + first + "','" + last + "','" + email + "','" + username + "','" + password + "')");
 }
 
-// Logs in a user when they attempt to sign up.
+// Logs in a user
 userInfo userDB::logInUser(string username, string password){
 
     if (!conn) {

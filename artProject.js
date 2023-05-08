@@ -11,7 +11,7 @@ var password;
 var artwork;
 var emotion;
 
-
+// Adds an event listener for the sign up button
 document.addEventListener("DOMContentLoaded", () => {
   const signUpButton = document.getElementById('signUp-btn');
   if (signUpButton) {
@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// Adds an event listener for the log in button
 document.addEventListener("DOMContentLoaded", () => {
   const logInButton = document.getElementById('logIn-btn');
   if (logInButton) {
@@ -34,8 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-
-// Action if the user presses the submit response button
+// Adds an event listener for the submit response button
 document.addEventListener("DOMContentLoaded", () => {
   const submitResponseButton = document.getElementById('submitResponse-btn');
   if (submitResponseButton) {
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Action if the user clicks the Sign Up link in the navbar
+// Adds an event listener for the Sign Up link in the navbar
 document.addEventListener("DOMContentLoaded", () => {
   const navbarSignUpLink = document.getElementById('navbar-signUp');
   if (navbarSignUpLink) {
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Action if the user clicks the Log In link in the navbar
+// Adds an event listener for the Log In link in the navbar
 document.addEventListener("DOMContentLoaded", () => {
   const navbarLogInLink = document.getElementById('navbar-logIn');
   if (navbarLogInLink) {
@@ -95,6 +95,7 @@ function registerUser() {
     })
 }
 
+// Reports errors in registering users or returns success status
 function completeRegistration(results) {
     var status = results['status'];
     if (status != "success") {
@@ -128,6 +129,7 @@ function logIn() {
     })
 }
 
+// Reports errors in logging in users or returns success status
 function completeLogIn(results, username) {
 	var status = results['status'];
 	if (status != "success") {
@@ -206,6 +208,7 @@ function submitResponse() {
     })
 }
 
+// Returns success message if response is submitted
 function completeResponse(results) {
 	alert("Response successfully submitted!");
 }

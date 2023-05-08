@@ -19,20 +19,21 @@ const int port = 5005;
 dynamicArtDB obj; // Create a global instance of the dynamicArtDB class
 
 int main() {
-    httplib::Server svr;
+	httplib::Server svr;
+    // Vector to store applicable emotions
 	vector<std::string> emotions = {"Happiness", "Sadness", "Fear", "Disgust", "Anger", "Surprise"};
+	
+	// API to get the percentages of each emotion from the responses database
+	svr.Get(R"(/dynamicArt/getEmotionPercentages/)", [&](const Request& req, Response& res) {
+		res.set_header("Access-Control-Allow-Origin", "*");
+		json result;
 
-  svr.Get(R"(/dynamicArt/getEmotionPercentages/)", [&](const Request& req, Response& res) {
-    res.set_header("Access-Control-Allow-Origin", "*");
-    json result;
-
-    for (const auto& e : emotions) {
-        int count = obj.getEmotionCount(e);
-        result[e] = count;
-    }
-    res.set_content(result.dump(), "application/json");
-});
-
+		for (const auto& e : emotions) {
+			int count = obj.getEmotionCount(e);
+			result[e] = count;
+		}
+		res.set_content(result.dump(), "application/json");
+	});
 
     svr.listen("localhost", 8080);
 

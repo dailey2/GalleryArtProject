@@ -14,10 +14,15 @@ class userDB {
 public:
     userDB();
     userInfo fetchEntry(string id);
+    // Checks if a username is already being used
     bool usernameExists(string username);
+    // Checks if an email is already being used
     bool emailExists(string email);
+    // Registers users
     void registerUser(string first, string last, string email, string username, string password);
+    // Checks to see if a user exists and password matches when logging in
     bool userExists(string username, string password);
+    // Logs in users
     userInfo logInUser(string username, string password);
 
 private:

@@ -58,6 +58,8 @@ int main(void) {
         bool passwordSuccess = password.length() > 6;
 		string result;
 		
+		// Registers user if username, email, and password and successful. Otherwise, returns appropriate
+		// error messages.
         if (usernameSuccess && emailSuccess && passwordSuccess){
             udb.registerUser(first, last, email, username, password);
             result = "{\"status\":\"success\"}";
@@ -78,7 +80,7 @@ int main(void) {
         string artwork = req.matches[1];
         string emotion = req.matches[2];
 
-        // Change submitResponse function to return a boolean indicating success or failure!!
+        // Attempts to submit response and returns success status
     	bool success = rdb.submitResponse(artwork, emotion);
 
     	string result;
