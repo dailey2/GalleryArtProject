@@ -15,7 +15,7 @@ using namespace std;
 
 const int port = 5005;
 
-int main(void) {
+int main(void) { 
     Server svr;
     userDB udb;
     responseDB rdb;
@@ -43,19 +43,6 @@ int main(void) {
         }
     });
 
-    // Service to log out users (Needs to be worked on!!)
-    svr.Get(R"(/artProject/logOut/(.*)/(.*))", [&](const Request& req, Response& res) {
-        res.set_header("Access-Control-Allow-Origin","*");
-        string username = req.matches[1];
-        string password = req.matches[2];
-        string result;
-
-        // You can add any log out functionality here if needed.
-
-        result = "{\"status\":\"success\",\"user\":\"" + username + "\",\"message\":\"Logged out\"}";
-        res.set_content(result, "text/json");
-    });
-
     //Service to register new users
     svr.Get(R"(/artProject/register/(.*)/(.*)/(.*)/(.*)/(.*))", [&](const Request& req, Response& res) {
         res.set_header("Access-Control-Allow-Origin","*");
@@ -69,19 +56,20 @@ int main(void) {
         bool usernameSuccess = !udb.usernameExists(username);
         bool emailSuccess = !udb.emailExists(email);
         bool passwordSuccess = password.length() > 6;
-
+		string result;
+		
         if (usernameSuccess && emailSuccess && passwordSuccess){
             udb.registerUser(first, last, email, username, password);
-        }
-
-        string result;
-
-        if (usernameSuccess && emailSuccess && passwordSuccess){
             result = "{\"status\":\"success\"}";
         } else {
-            result = "{\"status\":\"error\"}";
-        }
-        res.set_content(result, "text/json");
+			result = "{\"status\":\"error\",";
+			if (!usernameSuccess) result += "\"username_error\":\"Username already exists.\",";
+			if (!emailSuccess) result += "\"email_error\":\"Email already in use.\",";
+			if (!passwordSuccess) result += "\"password_error\":\"Password is too short. Must be at least 7 characters.\",";
+			result.pop_back(); // Remove the trailing comma
+			result += "}";
+		}
+		res.set_content(result, "text/json");
     });
     
     // Service to submit responses

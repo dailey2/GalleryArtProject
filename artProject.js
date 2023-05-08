@@ -96,15 +96,19 @@ function registerUser() {
 }
 
 function completeRegistration(results) {
-	var status = results['status'];
-	if (status != "success") {
-		alert("Registration failed!");
-		return;
-	}else{
-		alert("Registration Successful! Please log in!");
-	}
-	var user = results['status'];
-	console.log("Registered:"+user);
+    var status = results['status'];
+    if (status != "success") {
+        var errorMessage = "Registration failed:\n";
+        if (results['username_error']) errorMessage += results['username_error'] + "\n";
+        if (results['email_error']) errorMessage += results['email_error'] + "\n";
+        if (results['password_error']) errorMessage += results['password_error'] + "\n";
+        alert(errorMessage.trim());
+        return;
+    } else {
+        alert("Registration Successful! Please log in!");
+    }
+    var user = results['status'];
+    console.log("Registered:" + user);
 }
 
 
@@ -127,7 +131,7 @@ function logIn() {
 function completeLogIn(results, username) {
 	var status = results['status'];
 	if (status != "success") {
-		alert("Log in failed!");
+		alert("Login failed. Please ensure you have an account and that your username and password are correct.");
 		return;
 	}else{
 		alert("Log in Successful!");
@@ -196,26 +200,14 @@ function submitResponse() {
     	method: 'get'
   	})
     .then (response => response.json() )
-    .then (data =>completeResponse(data))
+    .then (data => completeResponse(data))
     .catch(error => {
         {alert("Error: Something went wrong:"+error);}
     })
 }
 
 function completeResponse(results) {
-	var status = results['status'];
-	if (status != "success") {
-		alert("Response failed to submit!");
-		return;
-	}else{
-		alert("Response successfully submitted!");
-	}
+	alert("Response successfully submitted!");
 }
-
-
-
-
-
-
 
 

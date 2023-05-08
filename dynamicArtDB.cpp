@@ -33,19 +33,14 @@ dynamicArtDB::dynamicArtDB() {
    	
 }
 
-// Calculates percentage of emotions 
-void dynamicArtDB::getEmotionCount(std::string emotion) {
+// Returns the count of the given emotion
+int dynamicArtDB::getEmotionCount(string emotion) {
     if (!conn) {
         cerr << "Invalid database connection" << endl;
         exit(EXIT_FAILURE);
     }
 
     unique_ptr<sql::Statement> stmnt(conn->createStatement());
-    unique_ptr<sql::ResultSet> resTotal(stmnt->executeQuery("SELECT COUNT(*) as total FROM responses"));
-    int totalResponses = 0;
-    if (resTotal->next()) {
-        totalResponses = resTotal->getInt("total");
-    }
 
     map<string, int> emotionCounts;
     unique_ptr<sql::ResultSet> resEmotions(stmnt->executeQuery("SELECT emotion, COUNT(*) as count FROM responses GROUP BY emotion"));
@@ -56,12 +51,7 @@ void dynamicArtDB::getEmotionCount(std::string emotion) {
         emotionCounts[currentEmotion] = count;
     }
 
-    map<string, double> emotionPercentages;
-    for (const auto &entry : emotionCounts) {
-        emotionPercentages[entry.first] = static_cast<double>(entry.second) / totalResponses * 100;
-    }
-
-    // emotionPercentages now contains the percentage of responses for each emotion
-    // You can return it or use it as needed for the word cloud
+    // Return the count of the given emotion
+    return emotionCounts[emotion];
 }
 

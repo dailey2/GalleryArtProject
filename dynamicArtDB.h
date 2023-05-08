@@ -13,7 +13,8 @@
 class dynamicArtDB {
 public:
     dynamicArtDB();
-    void getEmotionCount(string emotion);
+    int getEmotionCount(string emotion);
+
 
 private:
     const string db_url = "jdbc:mariadb://localhost:3306/GalleryArtProject";
