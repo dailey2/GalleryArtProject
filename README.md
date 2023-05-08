@@ -1,7 +1,5 @@
 # GalleryArtProject
 
-# Dynamic Art Word Cloud
-
 A REST based dynamic art word cloud application using C++ and JavaScript.
 
 This project visualizes emotions associated with artworks using a word cloud. 
@@ -21,22 +19,25 @@ sudo apt-get install libssl-dev
 sudo apt-get install libz-dev
 ```
 
-MariaDB
+### MariaDB
+
 This assumes MariaDB is installed. If not, follow these instructions: https://www.digitalocean.com/community/tutorials/how-to-install-mariadb-on-ubuntu-22-04
 
 Install the MariaDB connector: https://mariadb.com/docs/skysql/connect/programming-languages/cpp/install/
 
-Set JavaScript IP address to your VM address
-Edit dynamicArt.js so that baseUrl is your VM's IP address.
+### Set JavaScript IP address to your VM address
+Edit dynamicArt.js and artProject.js so that baseUrl is your VM's IP address.
 
-Set up App
-Create a directory for the application:
+## Set up App
+
+### Create a directory for the application:
+
 ```sh
-sudo mkdir /var/www/html/dynamicArt/
-sudo chown ubuntu /var/www/html/dynamicArt/
+sudo mkdir /var/www/html/GalleryArtProject/
+sudo chown ubuntu /var/www/html/GalleryArtProject/
 ```
 
-Build and Run
+### Build and Run
 To build the application, run:
 ```sh
 make
@@ -44,9 +45,9 @@ make
 
 To start the application, run:
 ```sh
-./dynamicArt
+./GalleryArtProject
 ```
 
-Access the Application
-Go to your VM URL/dynamicArt/dynamicArt.html
+## Access the Application
+Go to your VM URL/GalleryArtProject/artProjectHome.html or URL/GalleryArtProject/dynamicArt.html
 
