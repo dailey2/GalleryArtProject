@@ -6,13 +6,18 @@
     	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
     	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
     	<title>Dynamic Art Word Cloud</title>
-    	<script src="https://d3js.org/d3-cloud.v1.min.js"></script>
-
+   		<script src="https://d3js.org/d3.v6.min.js"></script>
+    	<script src="https://unpkg.com/d3-cloud"></script>
+    	
     	<style>
 			body {
-				font-family: Arial, sans-serif;
-				background-color: black;
-			}
+			 font-family: Arial, sans-serif;
+	
+
+                          background-color: black;
+		}
+   
+
 			#word-cloud {
 				display: flex;
 				justify-content: center;
@@ -24,11 +29,11 @@
     	</style>
     </head>
   
-  	<body>
-  		<!-- Canvas to create the dynamic word cloud -->
-		<canvas id="word-cloud"></canvas>
-    	<script src="https://d3js.org/d3-cloud.v1.min.js"></script>
-		<script src="dynamicArt.js"></script>
-	</body>
+  <body>
+    <div id="word-cloud"></div>
+    <script src="https://d3js.org/d3-cloud.v1.min.js"></script>
+
+    <script src="dynamicArt.js"></script>
+  </body>
 
 </html>
